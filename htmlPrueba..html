@@ -1,0 +1,425 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Viaje</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilos básicos */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        /* Barra de navegación */
+        header {
+            background-color: #0079c2;
+            padding: 15px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+            nav ul li {
+                margin: 0 20px;
+            }
+
+                nav ul li a {
+                    color: white;
+                    text-decoration: none;
+                    font-weight: bold;
+                }
+
+        /* Banner principal */
+        .banner {
+            background-image: url('playa.avif');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .banner-content {
+            background-color: rgba(0, 0, 0, 0.5);
+            display: inline-block;
+            padding: 20px;
+        }
+
+        /* Sección de destinos */
+        .destinos {
+            text-align: center;
+            padding: 50px 0;
+            background-color: #fff;
+        }
+
+        .destinos-list {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .destino {
+            width: 30%;
+            padding: 20px;
+            background-color: #e0f7fa;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* Simulador */
+        .simulador {
+            text-align: center;
+            padding: 50px;
+            background-repeat: no-repeat;
+            background-attachment:fixed;
+            background-size: cover;
+            background-image:url(cancunavion.jpg);
+
+        }
+
+            .simulador input, .simulador select {
+                margin: 10px 0;
+                padding: 10px;
+                width: 80%;
+                max-width: 400px;
+            }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de Navegación -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Vuelos</a></li>
+                <li><a href="#">Hoteles</a></li>
+                <li><a href="#">Paquetes</a></li>
+                <li><a href="#">Ofertas</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Banner Principal -->
+    <section class="banner">
+        <div class="banner-content">
+            <h1>Encuentra tu viaje ideal</h1>
+            <p>Busca, compara y ahorra en tus próximas vacaciones.</p>
+            <button>Comienza a Buscar</button>
+        </div>
+    </section>
+
+    <!-- Sección de Destinos Recomendados -->
+    <section class="destinos">
+        <h2>Destinos Populares</h2>
+        <div class="destinos-list">
+            <div class="destino">
+                <h3>Cancún</h3>
+                <p>Las mejores playas del Caribe.</p>
+            </div>
+            <div class="destino">
+                <h3>Barcelona</h3>
+                <p>Un destino lleno de cultura y arte.</p>
+            </div>
+            <div class="destino">
+                <h3>New York</h3>
+                <p>La ciudad que nunca duerme.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulario de Simulación de Viaje -->
+    <section class="simulador">
+        <h2>Simula tu Viaje</h2>
+        <form id="simuladorViaje">
+            <label for="destino">Destino:</label>
+            <select id="destino">
+
+                <option onclick="operacion()" value="1">Mazatlán</option>
+                <option onclick="operacion()" value="2">Cancún</option>
+                <option onclick="operacion()" value="3">Guadalajara</option>
+                <option onclick="operacion()" value="4">Ciudad de Mexico</option>
+                <option onclick="operacion()" value="5">Playa del Cármen</option>
+                <option onclick="operacion()" value="6">Yucatán</option>
+                <option onclick="operacion()" value="7">Oaxaca</option>
+                <option onclick="operacion()" value="8">Playa de la Riviera Maya</option>
+                <option onclick="operacion()" value="9">Teotihuacán</option>
+                <option onclick="operacion()" value="10">Tulúm</option>
+                <option onclick="operacion()" value="11">Baja California</option>
+                <option onclick="operacion()" value="12">Chihuahua</option>
+                <option onclick="operacion()" value="13">Campeche</option>
+                <option onclick="operacion()" value="14">Punta Mita, Nayarit</option>
+                <option onclick="operacion()" value="15">Chiapas</option>
+                <option onclick="operacion()" value="16">Monterrey</option>
+                <option onclick="operacion()" value="17">Basilica de Guadalupe</option>
+                <option onclick="operacion()" value="18">Playa Balandra</option>
+                <option onclick="operacion()" value="19">Xcaret</option>
+                <option onclick="operacion()" value="20">Chichén Itzá</option>
+                <option onclick="operacion()" value="21">Palenque</option>
+                <option onclick="operacion()" value="22">Veracruz</option>
+                <option onclick="operacion()" value="23">Manzanillo</option>
+
+            </select><br>
+
+            <label for="personas">Número de personas:</label>
+            <input type="number" class="numPersona" id="personas" required><br>
+
+            <label for="transporte">Medio de transporte:</label>
+            <select id="transporte">
+                <option value="avión">Avión</option>
+                <option value="autobús">Autobús</option>
+            </select><br>
+            
+            <button type="button" onclick="validation()">Calcular costo</button>
+            <input type="text" id="display" />
+            
+        </form>
+
+        <div id="resultado"></div>
+        <script type="text/javascript">
+            mont = 0;
+            function validation() {
+                const vehiculo = document.getElementById('transporte').value;
+                switch (vehiculo) {
+                    case "avión":
+                        lugares(1);
+                        break;
+                    case "autobús":
+                        lugares(2);
+                        break;
+                }
+                mont = 0;
+            }
+            function lugares(vehiculo) {
+                const lugares = document.getElementById('destino').value;
+                switch (lugares) {
+                    case '1':
+                        //Mazatlán
+                        if (vehiculo == 1) {
+                            //Monto de viaje en avión por persona.
+                            mont = 700;
+                        }
+                        else {
+                            //Monto de vaje en autobús por persona.
+                            mont = 110;
+                        }
+                        break;
+                    case '2':
+                        //Cancún
+                        if (vehiculo == 1) {
+                            mont = 673;
+                        }
+                        else {
+                            mont = 190;
+                        }
+                        break;
+                    case '3':
+                        //Guadalajara
+                        if (vehiculo == 1) {
+                            mont = 2665;
+                        }
+                        else {
+                            mont = 1960;
+                        }
+                        break;
+                    case '4':
+                        //Ciudad de México
+                        if (vehiculo == 1) {
+                            mont = 2212;
+                        }
+                        else {
+                            mont = 2049;
+                        }
+                        break;
+                    case '5':
+                        //Playa del Cármen
+                        if (vehiculo == 1) {
+                            mont = 3643;
+                        }
+                        else {
+                            mont = 230;
+                        }
+                        break;
+                    case '6':
+                        //Yucatán
+                        if (vehiculo == 1) {
+                            mont = 4479;
+                        }
+                        else {
+                            mont = 200;
+                        }
+                        break;
+                    case '7':
+                        //Oaxaca
+                        if (vehiculo == 1) {
+                            mont = 3707;
+                        }
+                        else {
+                            mont = 200;
+                        }
+                        break;
+                    case '8':
+                        //Playa de la Rivera Maya
+                        if (vehiculo == 1) {
+                            mont = 4712;
+                        }
+                        else {
+                            mont = 150;
+                        }
+                        break;
+                    case '9':
+                        //Teotihuacán
+                        if (vehiculo == 1) {
+                            mont = 2382;
+                        }
+                        else {
+                            mont = 150;
+                        }
+                        break;
+                    case '10':
+                        //Tulúm
+                        if (vehiculo == 1) {
+                            mont = 2358;
+                        }
+                        else {
+                            mont = 160;
+                        }
+                        break;
+                    case '11':
+                        //Baja California
+                        if (vehiculo == 1) {
+                            mont = 2214;
+                        }
+                        else {
+                            mont = 2388;
+                        }
+                        break;
+                    case '12':
+                        //Chihuahua
+                        if (vehiculo == 1) {
+                            mont = 1582;
+                        }
+                        else {
+                            mont = 600;
+                        }
+                        break;
+                    case '13':
+                        //Campeche
+                        if (vehiculo == 1) {
+                            mont = 2882;
+                        }
+                        else {
+                            mont = 2636;
+                        }
+                        break;
+                    case '14':
+                        //Punta Mita, Nayarit
+                        if (vehiculo == 1) {
+                            mont = 1100;
+                        }
+                        else {
+                            mont = 1035;
+                        }
+                        break;
+                    case '15':
+                        //Chiapas
+                        if (vehiculo == 1) {
+                            mont = 2200;
+                        }
+                        else {
+                            mont = 1457;
+                        }
+                        break;
+                    case '16':
+                        //Monterrey
+                        if (vehiculo == 1) {
+                            mont = 1712;
+                        }
+                        else {
+                            mont = 500;
+                        }
+                        break;
+                    case '17':
+                        //Basilica de Guadalupe
+                        if (vehiculo == 1) {
+                            mont = 1972;
+                        }
+                        else {
+                            mont = 1242;
+                        }
+                        break;
+                    case '18':
+                        //Playa Balandra
+                        if (vehiculo == 1) {
+                            mont = 1530;
+                        }
+                        else {
+                            mont = 700;
+                        }
+                        break;
+                    case '19':
+                        //Xcaret
+                        if (vehiculo == 1) {
+                            mont = 700;
+                        }
+                        else {
+                            mont = 110
+                        }
+                        break;
+                    case '20':
+                        //Chichén Itzá
+                        if (vehiculo == 1) {
+                            mont = 2239;
+                        }
+                        else {
+                            mont = 3312;
+                        }
+                        break;
+                    case '21':
+                        //Palenque
+                        if (vehiculo == 1) {
+                            mont = 1720;
+                        }
+                        else {
+                            mont = 1462;
+                        }
+                        break;
+                    case '22':
+                        //Veracruz
+                        if (vehiculo == 1) {
+                            mont = 2000;
+                        }
+                        else {
+                            mont = 1626;
+                        }
+                        break;
+                     case '23':
+                        //Manzanillo
+                        if (vehiculo == 1) {
+                            mont = 4012;
+                        }
+                        else {
+                            mont = 1540;
+                        }
+                        break;
+                }
+                individuos();
+            }
+            function individuos() {
+                var personas = document.getElementById('personas').value;
+                mont = mont * personas;
+                document.getElementById('display').value = mont;
+            }
+        </script>
+    </section>
+
+</body>
+</html>
+
